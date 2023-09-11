@@ -1,3 +1,5 @@
-const TopCharts = () => <div>TopCharts</div>;
+import Discover from './Discover';
+
+const TopCharts = () => <Discover />;
 
 export default TopCharts;
