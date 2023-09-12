@@ -29,8 +29,8 @@ const ArtistDetails = () => {
   ) {
     data = Object.values(artistData?.resources?.songs);
   }
-  console.log('artist', artistData);
-  console.log('v2', data);
+  // console.log('artist', artistData);
+  // console.log('v2', data);
   return (
     <div className="flex flex-col">
       <DetailsHeader artistId={artistId} artistData={artistData} />

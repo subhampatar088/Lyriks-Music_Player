@@ -9,7 +9,7 @@ export const shazamCoreApi = createApi({
     prepareHeaders: (headers) => {
       headers.set(
         'X-RapidAPI-Key',
-        '675ae81d89msh8f9a5ecbdf30cbap1d8485jsnf4d36d55dc6b'
+        '3df58d0ad7mshf9e6861b6d5ab77p1f428bjsnbc132f3ab745'
       );
       return headers;
     },
@@ -26,6 +26,9 @@ export const shazamCoreApi = createApi({
     getArtistDetails: builder.query({
       query: (artistId) => `/artists/get-summary?id=${artistId}`,
     }),
+    getSongsBySearch: builder.query({
+      query: (searchTerm) => `/search?term=${searchTerm}`,
+    }),
   }),
 });
 
@@ -34,4 +37,27 @@ export const {
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
   useGetArtistDetailsQuery,
+  useGetSongsBySearchQuery,
 } = shazamCoreApi;
+
+export const shazamCoreApiV2 = createApi({
+  reducerPath: 'shazamCoreApiV2',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://shazam-api7.p.rapidapi.com',
+    prepareHeaders: (headers) => {
+      headers.set(
+        'X-RapidAPI-Key',
+        '3df58d0ad7mshf9e6861b6d5ab77p1f428bjsnbc132f3ab745'
+      );
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    getSongsByGenre: builder.query({
+      query: (genre) =>
+        `/charts/get-top-songs-in_country_by_genre?country_code=US&genre=${genre}&limit=50`,
+    }),
+  }),
+});
+
+export const { useGetSongsByGenreQuery } = shazamCoreApiV2;

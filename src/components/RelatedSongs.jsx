@@ -11,7 +11,9 @@ const RelatedSongs = ({
   console.log('releated page', data);
   return (
     <div className="flex flex-col">
-      <h1 className="font-bold text-3xl text-white mt-4">Top Songs:</h1>
+      <h1 className="font-bold text-3xl text-white mt-4">
+        Top Songs : (Search to play)
+      </h1>
 
       <div className="mt-6 w-full flex flex-col">
         {data?.map((song, i) => (

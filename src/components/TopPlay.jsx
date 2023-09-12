@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,10 +33,14 @@ const TopChartCard = ({
       />
       <div className="flex-1 flex flex-col justify-center mx-3">
         <Link to={`/songs/${song.key}`}>
-          <p className=" text-sm font-bold text-white">{song?.title}</p>
+          <p className=" text-sm font-bold text-white hover:bg-yellow-300 hover:bg-opacity-25">
+            {song?.title}
+          </p>
         </Link>
         <Link to={`/artists/${song?.artists[0].adamid}`}>
-          <p className="text-sm text-gray-300 mt-1">{song?.subtitle}</p>
+          <p className="text-sm text-gray-300 mt-1 hover:bg-yellow-300 hover:bg-opacity-25">
+            {song?.subtitle}
+          </p>
         </Link>
       </div>
     </div>
@@ -66,7 +71,7 @@ const TopPlay = () => {
   };
 
   const handlePlayClick = (song, i) => {
-    console.log('top-play', song);
+    // console.log('top-play', song);
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
@@ -81,7 +86,9 @@ const TopPlay = () => {
             Top Charts
           </h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer hover:bg-yellow-300 hover:bg-opacity-25">
+              See more
+            </p>
           </Link>
         </div>
         <div className="mt-3 flex flex-col gap-1">
@@ -102,7 +109,9 @@ const TopPlay = () => {
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-white font-bold text-2xl">Top Artists</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer hover:bg-yellow-300 hover:bg-opacity-25">
+              See more
+            </p>
           </Link>
         </div>
         <Swiper

@@ -1,22 +1,19 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable operator-linebreak */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable nonblock-statement-body-position */
 /* eslint-disable curly */
 /* eslint-disable spaced-comment */
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
+import { DetailsHeader, Error, Loader } from '../components';
 
-import { setActiveSong, playPause } from '../redux/features/playerSlice';
 import {
   useGetSongDetailsQuery,
   useGetTopChartsQuery,
-  useGetSongRelatedQuery,
 } from '../redux/services/shazamCore';
 
 const SongDetails = () => {
-  const dispatch = useDispatch();
   const { songid } = useParams();
-  const { activeSong, isPlaying } = useSelector((state) => state.player);
   const {
     data: songData,
     isFetching: isFetchingSongDetails,
@@ -27,26 +24,10 @@ const SongDetails = () => {
   //coverart, title and subtitle
   const { data, isFetching, error } = useGetTopChartsQuery();
 
-  // const {
-  //   data: relatedSongData,
-  //   isFetching: isFetchingRelatedSongs,
-  //   error: err2,
-  // } = useGetSongRelatedQuery({ songid });
-  //console.log('related', relatedSongData);
-
-  const handlePauseClick = () => {
-    dispatch(playPause(false));
-  };
-
-  const handlePlayClick = (song, i) => {
-    dispatch(setActiveSong({ song, data, i }));
-    dispatch(playPause(true));
-  };
-
-  if (isFetchingSongDetails || isFetching || isFetchingRelatedSongs)
+  if (isFetchingSongDetails || isFetching)
     return <Loader title="Loading Song Details...." />;
 
-  if (err || error || err2) return <Error />;
+  if (err || error) return <Error />;
 
   let currSong;
   for (const song of data?.tracks || []) {
